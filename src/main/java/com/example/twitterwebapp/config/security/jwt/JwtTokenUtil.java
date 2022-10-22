@@ -35,15 +35,6 @@ public class JwtTokenUtil {
                    .compact();
     }
 
-    public String getUserId(String token) {
-        Claims claims = Jwts.parser()
-                            .setSigningKey(jwtSecret)
-                            .parseClaimsJws(token)
-                            .getBody();
-
-        return claims.getSubject().split(",")[0];
-    }
-
     public String getUsername(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
@@ -51,15 +42,6 @@ public class JwtTokenUtil {
                 .getBody();
 
         return claims.getSubject().split(",")[1];
-    }
-
-    public Date getExpirationDate(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(jwtSecret)
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getExpiration();
     }
 
     public boolean validate(String token) {
