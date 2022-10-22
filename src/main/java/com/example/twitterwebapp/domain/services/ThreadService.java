@@ -3,11 +3,11 @@ package com.example.twitterwebapp.domain.services;
 import com.example.twitterwebapp.domain.entities.Thread;
 import com.example.twitterwebapp.domain.repositories.ThreadRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.List;
 
 @Service
 public class ThreadService {
@@ -25,15 +25,15 @@ public class ThreadService {
         return threadRepository.save(entity);
     }
 
-    public Optional<Thread> findById(UUID uuid) {
-        return threadRepository.findById(uuid);
+    public Thread findById(Long id) {
+        return threadRepository.findById(id).orElseThrow();
     }
 
     public long count() {
         return threadRepository.count();
     }
 
-    public void deleteById(UUID uuid) {
-        threadRepository.deleteById(uuid);
+    public void deleteById(Long id) {
+        threadRepository.deleteById(id);
     }
 }

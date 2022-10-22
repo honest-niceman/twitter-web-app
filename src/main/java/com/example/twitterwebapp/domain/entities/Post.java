@@ -12,7 +12,6 @@ import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "post")
@@ -21,8 +20,9 @@ import java.util.UUID;
 @ToString
 public class Post {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Long id;
 
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "attachment_id")

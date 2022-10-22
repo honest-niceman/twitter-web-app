@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AttachmentService {
@@ -25,15 +24,15 @@ public class AttachmentService {
         return attachmentRepository.save(entity);
     }
 
-    public Optional<Attachment> findById(UUID uuid) {
-        return attachmentRepository.findById(uuid);
+    public Optional<Attachment> findById(Long id) {
+        return attachmentRepository.findById(id);
     }
 
     public long count() {
         return attachmentRepository.count();
     }
 
-    public void deleteById(UUID uuid) {
-        attachmentRepository.deleteById(uuid);
+    public void deleteById(Long id) {
+        attachmentRepository.deleteById(id);
     }
 }

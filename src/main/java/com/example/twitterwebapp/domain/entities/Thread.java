@@ -11,7 +11,6 @@ import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "thread")
@@ -20,8 +19,9 @@ import java.util.UUID;
 @ToString
 public class Thread {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Long id;
 
     @ToString.Exclude
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

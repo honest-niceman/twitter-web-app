@@ -8,7 +8,6 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "comment")
@@ -17,8 +16,9 @@ import java.util.UUID;
 @ToString
 public class Comment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "post_id")

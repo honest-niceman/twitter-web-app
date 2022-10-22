@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class PostService {
@@ -29,18 +28,18 @@ public class PostService {
         return postRepository.save(entity);
     }
 
-    public Post findById(UUID uuid) {
-        return postRepository.findById(uuid).orElseThrow();
+    public Post findById(Long id) {
+        return postRepository.findById(id).orElseThrow();
     }
 
     public long count() {
         return postRepository.count();
     }
 
-    public void deleteById(UUID uuid) {
-        if (!postRepository.existsById(uuid)) {
-            throw new EntityNotFoundException("There is no entity with id=%s".formatted(uuid));
+    public void deleteById(Long id) {
+        if (!postRepository.existsById(id)) {
+            throw new EntityNotFoundException("There is no entity with id=%s".formatted(id));
         }
-        postRepository.deleteById(uuid);
+        postRepository.deleteById(id);
     }
 }

@@ -4,7 +4,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * A DTO for the {@link com.example.twitterwebapp.domain.entities.User} entity
@@ -20,6 +19,6 @@ public class UserDto implements Serializable {
     private final String firstName;
     private final String lastName;
     private final String bio;
-    private final Set<UUID> threadIds;
-    private final Set<UUID> commentIds;
+    private final Set<Long> threadIds;
+    private final Set<Long> commentIds;
 }

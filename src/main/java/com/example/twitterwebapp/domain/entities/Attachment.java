@@ -7,7 +7,6 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
 @Table(name = "attachment")
@@ -16,8 +15,9 @@ import java.util.UUID;
 @ToString
 public class Attachment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    private UUID id;
+    private Long id;
 
     @Column(name = "attachment_url")
     private String attachmentUrl;
