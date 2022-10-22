@@ -5,22 +5,21 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
     objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
-
-    <changeSet id="1666461079695-1" author="vlasov (generated)">
+    <changeSet id="1666471186954-1" author="vlasov (generated)">
         <createTable tableName="attachment">
-            <column name="id" type="UUID">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_attachment"/>
             </column>
             <column name="attachment_url" type="VARCHAR(255)"/>
-            <column name="post_id" type="UUID"/>
+            <column name="post_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666461079695-2" author="vlasov (generated)">
+    <changeSet id="1666471186954-2" author="vlasov (generated)">
         <createTable tableName="comment">
-            <column name="id" type="UUID">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_comment"/>
             </column>
-            <column name="post_id" type="UUID"/>
+            <column name="post_id" type="BIGINT"/>
             <column name="user_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
@@ -28,17 +27,17 @@
             <column name="date" type="DATE">
                 <constraints nullable="false"/>
             </column>
-            <column name="previous_comment_id" type="UUID"/>
+            <column name="previous_comment_id" type="BIGINT"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666461079695-3" author="vlasov (generated)">
+    <changeSet id="1666471186954-3" author="vlasov (generated)">
         <createTable tableName="post">
-            <column name="id" type="UUID">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_post"/>
             </column>
-            <column name="attachment_id" type="UUID"/>
+            <column name="attachment_id" type="BIGINT"/>
             <column name="text" type="VARCHAR(255)"/>
-            <column name="thread_id" type="UUID">
+            <column name="thread_id" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
             <column name="date" type="DATE">
@@ -46,9 +45,9 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1666461079695-4" author="vlasov (generated)">
+    <changeSet id="1666471186954-4" author="vlasov (generated)">
         <createTable tableName="thread">
-            <column name="id" type="UUID">
+            <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_thread"/>
             </column>
             <column name="user_id" type="BIGINT">
@@ -56,7 +55,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="1666461079695-5" author="vlasov (generated)">
+    <changeSet id="1666471186954-5" author="vlasov (generated)">
         <createTable tableName="user">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user"/>
@@ -69,34 +68,34 @@
             <column name="role" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="1666461079695-6" author="vlasov (generated)">
+    <changeSet id="1666471186954-6" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="attachment"
                                  constraintName="FK_ATTACHMENT_ON_POST" referencedColumnNames="id"
                                  referencedTableName="post"/>
     </changeSet>
-    <changeSet id="1666461079695-7" author="vlasov (generated)">
+    <changeSet id="1666471186954-7" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="comment" constraintName="FK_COMMENT_ON_POST"
                                  referencedColumnNames="id" referencedTableName="post"/>
     </changeSet>
-    <changeSet id="1666461079695-8" author="vlasov (generated)">
+    <changeSet id="1666471186954-8" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="previous_comment_id" baseTableName="comment"
                                  constraintName="FK_COMMENT_ON_PREVIOUS_COMMENT" referencedColumnNames="id"
                                  referencedTableName="comment"/>
     </changeSet>
-    <changeSet id="1666461079695-9" author="vlasov (generated)">
+    <changeSet id="1666471186954-9" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="comment" constraintName="FK_COMMENT_ON_USER"
                                  referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
-    <changeSet id="1666461079695-10" author="vlasov (generated)">
+    <changeSet id="1666471186954-10" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="attachment_id" baseTableName="post"
                                  constraintName="FK_POST_ON_ATTACHMENT" referencedColumnNames="id"
                                  referencedTableName="attachment"/>
     </changeSet>
-    <changeSet id="1666461079695-11" author="vlasov (generated)">
+    <changeSet id="1666471186954-11" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="thread_id" baseTableName="post" constraintName="FK_POST_ON_THREAD"
                                  referencedColumnNames="id" referencedTableName="thread"/>
     </changeSet>
-    <changeSet id="1666461079695-12" author="vlasov (generated)">
+    <changeSet id="1666471186954-12" author="vlasov (generated)">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="thread" constraintName="FK_THREAD_ON_USER"
                                  referencedColumnNames="id" referencedTableName="user"/>
     </changeSet>
