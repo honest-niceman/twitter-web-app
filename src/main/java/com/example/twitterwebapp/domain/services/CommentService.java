@@ -3,11 +3,11 @@ package com.example.twitterwebapp.domain.services;
 import com.example.twitterwebapp.domain.entities.Comment;
 import com.example.twitterwebapp.domain.repositories.CommentRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.UUID;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -17,23 +17,25 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public Page<Comment> findAll(Pageable pageable) {
-        return commentRepository.findAll(pageable);
+    public List<Comment> findAll(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Comment> comments = commentRepository.finAllOrderById(pageable);
+        return comments.getContent();
     }
 
     public Comment save(Comment entity) {
         return commentRepository.save(entity);
     }
 
-    public Optional<Comment> findById(UUID uuid) {
-        return commentRepository.findById(uuid);
+    public Comment findById(Long id) {
+        return commentRepository.findById(id).orElseThrow();
     }
 
     public long count() {
         return commentRepository.count();
     }
 
-    public void deleteById(UUID uuid) {
-        commentRepository.deleteById(uuid);
+    public void deleteById(Long id) {
+        commentRepository.deleteById(id);
     }
 }

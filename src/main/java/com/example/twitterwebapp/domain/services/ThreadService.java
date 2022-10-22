@@ -17,8 +17,10 @@ public class ThreadService {
         this.threadRepository = threadRepository;
     }
 
-    public Page<Thread> findAll(Pageable pageable) {
-        return threadRepository.findAll(pageable);
+    public List<Thread> findAll(int pageNumber, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNumber, pageSize);
+        Page<Thread> threads = threadRepository.finAllOrderById(pageable);
+        return threads.getContent();
     }
 
     public Thread save(Thread entity) {

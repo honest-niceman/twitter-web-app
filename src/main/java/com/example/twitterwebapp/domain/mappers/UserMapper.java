@@ -8,7 +8,6 @@ import com.example.twitterwebapp.domain.entities.User;
 import org.mapstruct.*;
 
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
@@ -31,11 +30,11 @@ public interface UserMapper {
     User updateUserFromUserRegistrationDto(UserRegistrationDto userRegistrationDto,
                                            @MappingTarget User user);
 
-    default Set<UUID> commentsToCommentIds(Set<Comment> comments) {
+    default Set<Long> commentsToCommentIds(Set<Comment> comments) {
         return comments.stream().map(Comment::getId).collect(Collectors.toSet());
     }
 
-    default Set<UUID> threadsToThreadIds(Set<Thread> threads) {
+    default Set<Long> threadsToThreadIds(Set<Thread> threads) {
         return threads.stream().map(Thread::getId).collect(Collectors.toSet());
     }
 }

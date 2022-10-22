@@ -1,14 +1,13 @@
 package com.example.twitterwebapp.web.controllers.domain;
 
 import com.example.twitterwebapp.domain.dtos.PostFullDto;
-import com.example.twitterwebapp.domain.dtos.PostWithThreadDto;
+import com.example.twitterwebapp.domain.dtos.PostWithThreadAndAttachmentDto;
 import com.example.twitterwebapp.domain.entities.Post;
 import com.example.twitterwebapp.domain.mappers.PostMapper;
 import com.example.twitterwebapp.domain.services.PostService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/post")
@@ -30,13 +29,13 @@ public class PostController {
     }
 
     @PostMapping("/save")
-    public PostFullDto save(@RequestParam PostWithThreadDto dto) {
-        Post post = postService.save(postMapper.postWithThreadDtoToPost(dto));
+    public PostFullDto save(@RequestParam PostWithThreadAndAttachmentDto dto) {
+        Post post = postService.save(postMapper.postWithThreadAndAttachementDtoToPost(dto));
         return postMapper.postToPostFullDto(post);
     }
 
     @GetMapping("/find")
-    public PostFullDto findById(@RequestParam UUID id) {
+    public PostFullDto findById(@RequestParam Long id) {
         Post post = postService.findById(id);
         return postMapper.postToPostFullDto(post);
     }
@@ -47,7 +46,7 @@ public class PostController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteById(@RequestParam UUID uuid) {
-        postService.deleteById(uuid);
+    public void deleteById(@RequestParam Long id) {
+        postService.deleteById(id);
     }
 }
