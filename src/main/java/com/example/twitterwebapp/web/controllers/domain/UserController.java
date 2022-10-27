@@ -5,7 +5,6 @@ import com.example.twitterwebapp.domain.dtos.UserRegistrationDto;
 import com.example.twitterwebapp.domain.entities.Role;
 import com.example.twitterwebapp.domain.entities.User;
 import com.example.twitterwebapp.domain.mappers.UserMapper;
-import com.example.twitterwebapp.domain.repositories.UserRepository;
 import com.example.twitterwebapp.domain.services.UserService;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -20,16 +19,13 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;
-    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     public UserController(UserService userService,
-                            UserMapper userMapper,
-                          UserRepository userRepository,
+                          UserMapper userMapper,
                           PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.userMapper = userMapper;
-        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -41,12 +37,15 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public UserRegistrationDto save(@RequestParam UserRegistrationDto dto) {
-        if (userRepository.existsByUsername(dto.getUsername())) {
+    public UserRegistrationDto save(@RequestBody UserRegistrationDto dto) {
+        if (userService.existsByUsername(dto.getUsername())) {
             throw new EntityExistsException();
         }
-        User user = User.builder().username(dto.getUsername()).firstName(dto.getLastName())
-                        .password(passwordEncoder.encode(dto.getPassword())).role(Role.ADMIN).build();
+        User user = User.builder()
+                        .username(dto.getUsername())
+                        .firstName(dto.getLastName())
+                        .password(passwordEncoder.encode(dto.getPassword()))
+                        .role(Role.ADMIN).build();
         return userMapper.userToUserRegistrationDto(userService.save(user));
     }
 

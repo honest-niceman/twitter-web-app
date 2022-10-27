@@ -18,8 +18,10 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
             "                    select comments.id, comments.previous_comment_id, comments.text, comments.date, comments.post_id, comments.user_id, r.level + 1 as level" +
             "                    from comments join r on comments.previous_comment_id = r.id)" +
             "select * FROM r", nativeQuery = true)
-    List<Comment>findByID(@Param("id") Long id);
+    List<Comment> findByIdRecursive(@Param("id") Long id);
 
-    @Query("select c from Comment c order by c.id")
-    Page<Comment> finAllOrderById(Pageable pageable);
+    @Query("select c from Comment c where c.user.id = :id order by c.id")
+    Page<Comment> finAllOrderById(Pageable pageable, Long id);
+
+    long countByUser_Id(Long id);
 }

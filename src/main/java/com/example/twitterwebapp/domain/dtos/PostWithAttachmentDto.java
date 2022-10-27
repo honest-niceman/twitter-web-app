@@ -10,10 +10,9 @@ import java.util.Set;
  * A DTO for the {@link com.example.twitterwebapp.domain.entities.Post} entity
  */
 @Data
-public class PostFullDto implements Serializable {
+public class PostWithAttachmentDto implements Serializable {
     private final Long id;
     private final String text;
-    private final Long userId;
     private final LocalDate date;
     private final Set<AttachmentDto> attachments;
 

@@ -2,13 +2,9 @@ package com.example.twitterwebapp.domain.entities;
 
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "\"user\"")
@@ -42,18 +38,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Role role;
-
-    @Builder.Default
-    @ToString.Exclude
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    private Set<Thread> threads = new LinkedHashSet<>();
-
-    @Builder.Default
-    @ToString.Exclude
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Comment> comments = new LinkedHashSet<>();
 
     @Override
     public boolean equals(Object o) {

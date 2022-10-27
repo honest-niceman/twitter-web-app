@@ -15,6 +15,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
             "having upper(p.text) like upper(concat('%', :word, '%'))")
     List<Post> findByCommentsContainsBannedWord(@Param("word") String word);
 
-    @Query("select p from Post p order by p.id")
-    Page<Post> finAllOrderById(Pageable pageable);
+    @Query("select p from Post p where p.user.id = :id order by p.id")
+    Page<Post> finAllOrderById(Pageable pageable, Long id);
+
+    long countByUser_Id(Long id);
 }

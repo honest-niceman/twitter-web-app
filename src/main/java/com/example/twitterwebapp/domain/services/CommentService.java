@@ -17,9 +17,9 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public List<Comment> findAll(int pageNumber, int pageSize) {
+    public List<Comment> findAll(Integer pageNumber, Integer pageSize, Long id) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Comment> comments = commentRepository.finAllOrderById(pageable);
+        Page<Comment> comments = commentRepository.finAllOrderById(pageable, id);
         return comments.getContent();
     }
 
@@ -31,8 +31,8 @@ public class CommentService {
         return commentRepository.findById(id).orElseThrow();
     }
 
-    public long count() {
-        return commentRepository.count();
+    public long count(Long id) {
+        return commentRepository.countByUser_Id(id);
     }
 
     public void deleteById(Long id) {

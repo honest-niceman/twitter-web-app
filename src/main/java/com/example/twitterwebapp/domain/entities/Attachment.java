@@ -22,7 +22,11 @@ public class Attachment {
     @Column(name = "attachment_url")
     private String attachmentUrl;
 
-    @OneToOne(orphanRemoval = true)
+    @ManyToOne
+    @JoinColumn(name = "draft_id")
+    private Draft draft;
+
+    @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
 

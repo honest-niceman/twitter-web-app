@@ -24,8 +24,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //Возвращает список пользователей,
     // у которых есть посты в заданную дату
     @Query("select u from User u " +
-            "inner join Thread t on t.user.id = u.id " +
-            "inner join Post p on p.thread.id = t.id " +
+            "inner join Post p on p.user.id = u.id " +
             "where p.date=:date " +
             "group by u")
     List<User> findUsersThatPosts(@Param("date") LocalDate date);
