@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-content class="align-content-center">
+    <form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Username:</mat-label>
+          <input matInput type="username"
+                 formControlName="username"
+                 placeholder="Your username">
+          <mat-icon matSuffix></mat-icon>
+          <mat-error *ngIf="form.controls['username'].errors?.['required']">Username is required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password:</mat-label>
+          <input matInput [type]="flag ? 'password' : 'text'"
+                 placeholder="Your password"
+                 formControlName="password">
+          <mat-icon (click)="flag=!flag" matSuffix>{{ flag ? 'visibility' : 'visibility_off' }}</mat-icon>
+          <mat-error *ngIf="form.controls['password'].errors?.['required']">Password is required</mat-error>
+          <mat-error *ngIf="form.controls['password'].errors?.['minlength']">At least 6 characters are required</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="align-content-center">
+        <button mat-raised-button color="primary"
+                type="submit" [disabled]="!form.valid">
+          Login
+        </button>
+      </div>
+      <mat-card-footer *ngIf="f.submitted && isLoginFailed"
+                       class="alert alert-danger"
+                       role="alert">
+        Something went wrong
+      </mat-card-footer>
+    </form>
+  </mat-card-content>
+</mat-card>
