@@ -6,4 +6,5 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
     <include file="db/changelog/2022/10/22-01-init-changelog.xml"/>
     <include file="db/changelog/2022/10/22-02-add-one-admin.xml"/>
+    <include file="/db/changelog/2022/12/10-01-add-email-column-to-user.xml"/>
 </databaseChangeLog>

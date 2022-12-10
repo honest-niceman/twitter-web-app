@@ -1,5 +1,6 @@
 package com.example.twitterwebapp.domain.dtos;
 
+import com.example.twitterwebapp.domain.entities.Role;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -10,15 +11,9 @@ import java.util.Set;
  */
 @Data
 public class UserDto implements Serializable {
-    private final Long id;
-    private final String username;
-    private final boolean accountNonExpired;
-    private final boolean accountNonLocked;
-    private final boolean credentialsNonExpired;
-    private final boolean enabled;
-    private final String firstName;
-    private final String lastName;
-    private final String bio;
-    private final Set<Long> threadIds;
-    private final Set<Long> commentIds;
+    private Long id;
+    private String username;
+    private String password;
+    private Role role;
+    private String email;
 }
