@@ -7,4 +7,6 @@
     <include file="db/changelog/2022/10/22-01-init-changelog.xml"/>
     <include file="db/changelog/2022/10/22-02-add-one-admin.xml"/>
     <include file="/db/changelog/2022/12/10-01-add-email-column-to-user.xml"/>
+    <include file="db/changelog/2022/12/20-01-remove-draft-changelog.xml"/>
+    <include file="/db/changelog/2022/12/20-02-adjust-post-to-attachment-cardinality-changelog.xml"/>
 </databaseChangeLog>

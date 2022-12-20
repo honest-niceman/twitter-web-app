@@ -4,15 +4,14 @@
     <a href="/">Twitter</a>
   </span>
     <div *ngIf="isLoggedIn">
-      <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
-      <!--Other pages will be there-->
+      <a mat-button routerLink="/users" routerLinkActive="active" *ngIf="role?.toUpperCase()==='ADMIN'">Users</a>
+      <a mat-button routerLink="/posts" routerLinkActive="active">Posts</a>
     </div>
     <div *ngIf="!isLoggedIn">
       <a mat-button routerLink="/login" routerLinkActive="active">Log in</a>
       <a mat-button routerLink="/register" routerLinkActive="active">Register</a>
     </div>
     <div *ngIf="isLoggedIn">
-      <a mat-button routerLink="/profile" routerLinkActive="active">Profile</a>
       <a mat-button href (click)="logout()" routerLinkActive="active">Log out</a>
     </div>
   </mat-toolbar>

@@ -1,30 +1,29 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {UserService} from "../../services/user.service";
-import {user} from "../../user";
+import {PostService} from "../../services/post.service";
+import {post} from "../../post";
 
 @Component({
-  selector: 'app-user-add-dialog',
-  templateUrl: './user-dialog.component.html',
-  styleUrls: ['./user-dialog.component.css']
+  selector: 'app-post-add-dialog',
+  templateUrl: './post-dialog.component.html',
+  styleUrls: ['./post-dialog.component.css']
 })
-export class UserDialogComponent implements OnInit {
+export class PostDialogComponent implements OnInit {
   form: FormGroup;
   actionBtn: string = "Add";
   submitClick: boolean = false;
 
   constructor(
-    public dialogRef: MatDialogRef<UserDialogComponent>,
+    public dialogRef: MatDialogRef<PostDialogComponent>,
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public editData: user,
-    private userService: UserService) {
+    @Inject(MAT_DIALOG_DATA) public editData: post,
+    private postService: PostService) {
     this.form = this.fb.group({
       id: [null],
-      username: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      role: [null, [Validators.required]],
-      password: [null, [Validators.required]]
+      date: [null, [Validators.required]],
+      text: [null, [Validators.required]],
+      attachmentUrl: [null, [Validators.required]]
     });
   }
 
@@ -32,10 +31,9 @@ export class UserDialogComponent implements OnInit {
     if (this.editData) {
       this.actionBtn = "Save";
       this.form.controls["id"].setValue(this.editData.id);
-      this.form.controls["username"].setValue(this.editData.username);
-      this.form.controls["email"].setValue(this.editData.email);
-      this.form.controls["role"].setValue(this.editData.role);
-      this.form.controls["password"].setValue(this.editData.password);
+      this.form.controls["date"].setValue(this.editData.date);
+      this.form.controls["text"].setValue(this.editData.text);
+      this.form.controls["attachmentUrl"].setValue(this.editData.attachmentUrl);
     }
   }
 
@@ -48,7 +46,7 @@ export class UserDialogComponent implements OnInit {
   }
 
   addData() {
-    this.userService.createUser(this.form.value).subscribe({
+    this.postService.createPost(this.form.value).subscribe({
       next: () => {
         this.submitClick = true;
         this.onClose()
@@ -60,7 +58,7 @@ export class UserDialogComponent implements OnInit {
   }
 
   updateData() {
-    this.userService.updateUser(this.form.value).subscribe(
+    this.postService.updatePost(this.form.value).subscribe(
       {
         next: () => {
           this.submitClick = true;

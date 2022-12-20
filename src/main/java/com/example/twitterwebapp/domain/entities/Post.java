@@ -7,9 +7,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "post")
@@ -32,10 +30,10 @@ public class Post {
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name = "post_id")
     @ToString.Exclude
-    private Set<Attachment> attachments = new LinkedHashSet<>();
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "attachment_id")
+    private Attachment attachment;
 
     @Override
     public boolean equals(Object o) {

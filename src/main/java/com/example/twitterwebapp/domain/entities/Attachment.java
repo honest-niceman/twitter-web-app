@@ -22,12 +22,7 @@ public class Attachment {
     @Column(name = "attachment_url")
     private String attachmentUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "draft_id")
-    private Draft draft;
-
-    @ManyToOne
-    @JoinColumn(name = "post_id")
+    @OneToOne(mappedBy = "attachment", optional = false)
     private Post post;
 
     @Override

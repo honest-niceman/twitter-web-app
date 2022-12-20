@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd"
+    objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1671536453175-1" author="vlasov (generated)">
+        <dropForeignKeyConstraint baseTableName="attachment" constraintName="fk_attachment_on_draft"/>
+    </changeSet>
+    <changeSet id="1671536453175-2" author="vlasov (generated)">
+        <dropForeignKeyConstraint baseTableName="draft" constraintName="fk_draft_on_user"/>
+    </changeSet>
+    <changeSet id="1671536453175-3" author="vlasov (generated)">
+        <dropTable cascadeConstraints="true" tableName="draft"/>
+    </changeSet>
+    <changeSet id="1671536453175-4" author="vlasov (generated)">
+        <dropColumn columnName="draft_id" tableName="attachment"/>
+    </changeSet>
+
+</databaseChangeLog>

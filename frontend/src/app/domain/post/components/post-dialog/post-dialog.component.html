@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{actionBtn}}</h1>
+<div mat-dialog-content>
+  <form #f="ngForm" [formGroup]="form" autocomplete="on">
+    <br>
+    <mat-form-field appearance="outline">
+      <mat-label>Text</mat-label>
+      <input matInput type="text" formControlName="text" placeholder="">
+      <mat-error *ngIf="form.controls['text'].errors?.['required']"></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Attachment url</mat-label>
+      <input matInput type="text" formControlName="attachmentUrl" placeholder="">
+      <mat-error *ngIf="form.controls['attachmentUrl'].errors?.['required']"></mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.controls['date'].errors?.['required']"></mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" (click)="onClose()" mat-dialog-close="">Close</button>
+  <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="onSubmit()">{{actionBtn}}</button>
+</div>

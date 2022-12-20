@@ -1,7 +1,6 @@
 package com.example.twitterwebapp.domain.services;
 
 import com.example.twitterwebapp.domain.entities.Post;
-import com.example.twitterwebapp.domain.repositories.AttachmentRepository;
 import com.example.twitterwebapp.domain.repositories.PostRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +13,9 @@ import java.util.List;
 @Service
 public class PostService {
     private final PostRepository postRepository;
-    private final AttachmentRepository attachmentRepository;
 
-    public PostService(PostRepository postRepository,
-                       AttachmentRepository attachmentRepository) {
+    public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
-        this.attachmentRepository = attachmentRepository;
     }
 
     public List<Post> findAll(int pageNumber, int pageSize, long userId) {
@@ -29,7 +25,6 @@ public class PostService {
     }
 
     public Post save(Post entity) {
-        attachmentRepository.saveAll(entity.getAttachments());
         return postRepository.save(entity);
     }
 
