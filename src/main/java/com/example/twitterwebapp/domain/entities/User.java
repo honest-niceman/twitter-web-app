@@ -42,6 +42,9 @@ public class User {
     @Column(name = "role")
     private Role role;
 
+    @Column(name = "photo", length = 1000)
+    private String photo;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

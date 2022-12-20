@@ -1,0 +1,22 @@
+<div>
+  <li *ngFor="let post of newsfeeds">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar>
+          <img mat-card-image
+               alt="img"
+               src="{{post.userPhoto}}"
+               class="example-header-image">
+        </div>
+        <mat-card-title class="center">{{post.username}}</mat-card-title>
+        <mat-card-subtitle class="center">{{post.date}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image alt="img" src="{{post.attachmentUrl}}">
+      <mat-card-content class="center">{{post.text}}</mat-card-content>
+      <mat-card-actions class="center">
+        <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </li>
+</div>

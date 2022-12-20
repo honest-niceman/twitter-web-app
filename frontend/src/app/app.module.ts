@@ -28,12 +28,14 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
 import {MomentDateAdapter} from "@angular/material-moment-adapter";
 import {MY_DATE_FORMATS} from "./domain/post/heplers/my-date-formats";
+import { NewsfeedComponent } from './domain/newsfeed/component/newsfeed.component';
 
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'users', component: UserComponent},
   {path: 'posts', component: PostComponent},
+  {path: 'feed', component: NewsfeedComponent},
   {path: '**', redirectTo: '/'}
 ];
 
@@ -45,7 +47,8 @@ const appRoutes: Routes = [
     UserComponent,
     UserDialogComponent,
     PostComponent,
-    PostDialogComponent
+    PostDialogComponent,
+    NewsfeedComponent
   ],
   imports: [
     BrowserModule,

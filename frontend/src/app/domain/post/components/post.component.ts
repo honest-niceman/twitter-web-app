@@ -47,12 +47,9 @@ export class PostComponent implements OnInit, AfterViewInit {
     }
   }
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: post): string {
     return `${this.selection.isSelected(<post>row) ? 'deselect' : 'select'}`;
   }
-
-  //---------------------------------------------------
 
   getAllData() {
     this.postService.getPosts()

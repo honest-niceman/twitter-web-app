@@ -1,11 +1,9 @@
 <div id="app">
   <mat-toolbar color="primary" class="navbar">
-  <span>
-    <a href="/">Twitter</a>
-  </span>
     <div *ngIf="isLoggedIn">
       <a mat-button routerLink="/users" routerLinkActive="active" *ngIf="role?.toUpperCase()==='ADMIN'">Users</a>
       <a mat-button routerLink="/posts" routerLinkActive="active">Posts</a>
+      <a mat-button routerLink="/feed" routerLinkActive="active">Feed</a>
     </div>
     <div *ngIf="!isLoggedIn">
       <a mat-button routerLink="/login" routerLinkActive="active">Log in</a>
