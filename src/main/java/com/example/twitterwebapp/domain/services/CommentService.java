@@ -17,9 +17,9 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public List<Comment> findAll(Integer pageNumber, Integer pageSize, Long id) {
+    public List<Comment> findAll(Integer pageNumber, Integer pageSize, Long postId) {
         Pageable pageable = PageRequest.of(pageNumber, pageSize);
-        Page<Comment> comments = commentRepository.finAllOrderById(pageable, id);
+        Page<Comment> comments = commentRepository.findAllCommentByPostId(postId, pageable);
         return comments.getContent();
     }
 

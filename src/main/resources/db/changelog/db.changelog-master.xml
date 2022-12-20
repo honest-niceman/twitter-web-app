@@ -10,4 +10,5 @@
     <include file="db/changelog/2022/12/20-01-remove-draft-changelog.xml"/>
     <include file="/db/changelog/2022/12/20-02-adjust-post-to-attachment-cardinality-changelog.xml"/>
     <include file="db/changelog/2022/12/20-03-add-photo-for-user-changelog.xml"/>
+    <include file="/db/changelog/2022/12/20-04-adjust-comment-changelog.xml"/>
 </databaseChangeLog>

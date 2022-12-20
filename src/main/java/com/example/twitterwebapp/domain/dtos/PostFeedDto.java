@@ -10,6 +10,7 @@ import java.time.LocalDate;
  */
 @Data
 public class PostFeedDto implements Serializable {
+    private final Long id;
     private final String text;
     private final String username;
     private final String userPhoto;

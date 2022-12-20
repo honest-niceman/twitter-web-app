@@ -11,8 +11,10 @@ import java.time.LocalDate;
 @Data
 public class CommentWithPostDto implements Serializable {
     private final Long id;
+    private final String body;
+    private final String username;
+    private final Long userId;
     private final Long postId;
-    private final String text;
     private final LocalDate date;
-    private final Long previousCommentId;
+    private final Long parentId;
 }

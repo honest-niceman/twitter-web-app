@@ -12,6 +12,7 @@ import {NewsfeedService} from "../services/newsfeed.service";
 export class NewsfeedComponent implements OnInit{
   role: string | undefined;
   newsfeeds: Array<newsfeed> = new Array<newsfeed>();
+  currentUserId: number;
 
   constructor(public dialog: MatDialog,
               private newsfeedService: NewsfeedService,
@@ -20,6 +21,7 @@ export class NewsfeedComponent implements OnInit{
 
   ngOnInit(): void {
     this.role = this.tokenStorage.getUser().role;
+    this.currentUserId = this.tokenStorage.getUser().id;
     this.getAllData();
   }
 

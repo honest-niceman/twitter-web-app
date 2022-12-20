@@ -5,36 +5,39 @@ import com.example.twitterwebapp.domain.entities.Comment;
 import com.example.twitterwebapp.domain.entities.Role;
 import com.example.twitterwebapp.domain.entities.User;
 import com.example.twitterwebapp.domain.mappers.CommentMapper;
+import com.example.twitterwebapp.domain.repositories.PostRepository;
 import com.example.twitterwebapp.domain.services.CommentService;
 import com.example.twitterwebapp.domain.services.UserService;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/v1/comment")
-@Secured("ROLE_USER")
 public class CommentController {
     private final CommentService commentService;
     private final CommentMapper commentMapper;
     private final UserService userService;
+    private final PostRepository postRepository;
 
     public CommentController(CommentService commentService,
                              CommentMapper commentMapper,
-                             UserService userService) {
+                             UserService userService,
+                             PostRepository postRepository) {
         this.commentService = commentService;
         this.commentMapper = commentMapper;
         this.userService = userService;
+        this.postRepository = postRepository;
     }
 
     @GetMapping("/find-all")
     public List<CommentWithPostDto> findAll(@RequestParam int pageNumber,
                                             @RequestParam int pageSize,
-                                            @RequestHeader(HttpHeaders.AUTHORIZATION) String header) {
-        User currentUser = userService.getCurrentUser(header);
-        List<Comment> comments = commentService.findAll(pageNumber, pageSize, currentUser.getId());
+                                            @RequestParam long postId) {
+        List<Comment> comments = commentService.findAll(pageNumber, pageSize, postId);
         return comments.stream().map(commentMapper::toDto).toList();
     }
 
@@ -42,7 +45,9 @@ public class CommentController {
     public CommentWithPostDto save(@RequestBody CommentWithPostDto dto,
                                    @RequestHeader(HttpHeaders.AUTHORIZATION) String header) {
         Comment entity = commentMapper.toEntity(dto);
+        entity.setDate(LocalDate.now());
         entity.setUser(userService.getCurrentUser(header));
+        entity.setPost(postRepository.findById(dto.getPostId()).orElseThrow());
         return commentMapper.toDto(commentService.save(entity));
     }
 

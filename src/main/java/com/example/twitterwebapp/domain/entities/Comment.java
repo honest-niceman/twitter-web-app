@@ -30,15 +30,14 @@ public class Comment {
     @ToString.Exclude
     private User user;
 
-    @Column(name = "text")
-    private String text;
+    @Column(name = "body")
+    private String body;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "previous_comment_id")
-    private Comment previousComment;
+    @Column(name = "parent_id")
+    private Long parentId;
 
     @Override
     public boolean equals(Object o) {

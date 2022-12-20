@@ -7,8 +7,9 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring")
 public interface CommentMapper {
 
-    @Mapping(source = "previousCommentId", target = "previousComment.id")
     @Mapping(source = "postId", target = "post.id")
+    @Mapping(source = "username", target = "user.username")
+    @Mapping(source = "userId", target = "user.id")
     Comment toEntity(CommentWithPostDto commentWithPostDto);
 
     @InheritInverseConfiguration(name = "toEntity")
@@ -16,6 +17,5 @@ public interface CommentMapper {
 
     @InheritConfiguration(name = "toEntity")
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Comment partialUpdate(CommentWithPostDto commentWithPostDto,
-                          @MappingTarget Comment comment);
+    Comment partialUpdate(CommentWithPostDto commentWithPostDto, @MappingTarget Comment comment);
 }
