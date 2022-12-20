@@ -3,7 +3,6 @@ package com.example.twitterwebapp.web.controllers.security;
 import com.example.twitterwebapp.config.security.jwt.JwtUtils;
 import com.example.twitterwebapp.config.security.services.UserDetailsImpl;
 import com.example.twitterwebapp.domain.dtos.JwtDto;
-import com.example.twitterwebapp.domain.dtos.UserCredentials;
 import com.example.twitterwebapp.domain.dtos.UserDto;
 import com.example.twitterwebapp.domain.entities.Role;
 import com.example.twitterwebapp.domain.mappers.UserMapper;
@@ -18,7 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping(path = "/api/v1/auth")
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class AuthenticationController {
     private final UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@RequestBody UserCredentials credentials) {
+    public ResponseEntity<?> authenticateUser(@RequestBody UserDto credentials) {
         var token = new UsernamePasswordAuthenticationToken(credentials.getUsername(), credentials.getPassword());
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -51,7 +50,7 @@ public class AuthenticationController {
             return ResponseEntity.badRequest().body("Username is already exist!");
         }
         if (userDto.getRole() == null) {
-            userDto.setRole(Role.USER);
+            userDto.setRole(Role.USER.toString());
         }
         userDto.setPassword(encoder.encode(userDto.getPassword()));
         userRepository.save(userMapper.userDtoToUser(userDto));

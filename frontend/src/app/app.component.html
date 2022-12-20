@@ -4,7 +4,8 @@
     <a href="/">Twitter</a>
   </span>
     <div *ngIf="isLoggedIn">
-<!--Other pages will be there-->
+      <a mat-button routerLink="/users" routerLinkActive="active">Users</a>
+      <!--Other pages will be there-->
     </div>
     <div *ngIf="!isLoggedIn">
       <a mat-button routerLink="/login" routerLinkActive="active">Log in</a>
